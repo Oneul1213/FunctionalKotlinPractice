@@ -125,6 +125,9 @@ fun tailrecFib(n: Long): Long {
     return go(n, 0, 1)
 }
 
+// 함수적 컬렉션
+val numbers: List<Int> = listOf(1, 2, 3, 4)
+
 fun main(args: Array<String>) {
     println(capitalize("hello world!"))
     println(transform("kotlin", capitalize))
@@ -171,4 +174,44 @@ fun main(args: Array<String>) {
     println(i)
 
     val size = listOf({2+1}, {3*2}, {1/0}, {5-4}).size
+
+    // 함수적 컬렉션
+    for(i in numbers) {
+        println("i = $i")
+    }
+
+    numbers.forEach { i -> println("i = $i") }
+
+//    val numbersTwice: MutableList<Int> = mutableListOf()
+
+//    for(i in numbers) {
+//        numbersTwice.add(i * 2)
+//    }
+
+    val numbersTwice: List<Int> = numbers.map { i -> i * 2 }
+
+//    var sum = 0
+//
+//    for (i in numbers) {
+//        sum += i
+//    }
+//    println(sum)
+
+//    val sum = numbers.sum()
+//    println(sum)
+
+//    val sum = numbers.fold(0) { acc, i -> acc + i }
+//    println(sum)
+
+//    val sum = numbers.fold(0) { acc, i ->
+//        println("acc, i = $acc, $i")
+//        acc + i
+//    }
+//    println(sum)
+
+    val sum = numbers.reduce { acc, i ->
+        println("acc, i = $acc, $i")
+        acc + i
+    }
+    println(sum)
 }
