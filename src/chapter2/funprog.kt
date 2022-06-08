@@ -128,6 +128,45 @@ fun tailrecFib(n: Long): Long {
 // 함수적 컬렉션
 val numbers: List<Int> = listOf(1, 2, 3, 4)
 
+// 함수형 리스트
+sealed class FunList<out T> {
+    object Nil: FunList<Nothing>()
+
+    data class Cons<out T> (val head: T, val tail: FunList<T>): FunList<T>()
+
+    fun forEach(f: (T) -> Unit) {
+        tailrec fun go(list: FunList<T>, f: (T) -> Unit) {
+            when (list) {
+                is Cons -> {
+                    f(list.head)
+                    go(list.tail, f)
+                }
+                is Nil -> Unit
+            }
+        }
+        go(this, f)
+    }
+
+    fun <R> fold(init: R, f: (R, T) -> R): R {
+        tailrec fun go(list: FunList<T>, init: R, f: (R, T) -> R): R = when
+                (list) {
+                    is Cons -> go(list.tail, f(init, list.head), f)
+                    is Nil -> init
+                }
+        return go(this, init, f)
+    }
+
+    fun reverse(): FunList<T> = fold(Nil as FunList<T>) { acc, i -> Cons(i, acc) }
+
+    fun <R> foldRight(init: R, f: (R, T) -> R): R {
+        return this.reverse().fold(init, f)
+    }
+
+    fun <R> map(f: (T) -> R): FunList<R> {
+        return foldRight(Nil as FunList<R>) { tail, head -> Cons(f(head), tail) }
+    }
+}
+
 fun main(args: Array<String>) {
     println(capitalize("hello world!"))
     println(transform("kotlin", capitalize))
@@ -183,7 +222,7 @@ fun main(args: Array<String>) {
     numbers.forEach { i -> println("i = $i") }
 
 //    val numbersTwice: MutableList<Int> = mutableListOf()
-
+//
 //    for(i in numbers) {
 //        numbersTwice.add(i * 2)
 //    }
@@ -196,13 +235,13 @@ fun main(args: Array<String>) {
 //        sum += i
 //    }
 //    println(sum)
-
+//
 //    val sum = numbers.sum()
 //    println(sum)
-
+//
 //    val sum = numbers.fold(0) { acc, i -> acc + i }
 //    println(sum)
-
+//
 //    val sum = numbers.fold(0) { acc, i ->
 //        println("acc, i = $acc, $i")
 //        acc + i
