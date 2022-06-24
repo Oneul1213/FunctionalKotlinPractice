@@ -1,7 +1,7 @@
 package chapter7
 
 interface UserRepository {
-    fun getUser(id: UserId): User?
+    fun getUserById(id: UserId): User?
     fun insertUser(user: User)
 }
 
