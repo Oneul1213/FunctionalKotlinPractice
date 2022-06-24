@@ -6,6 +6,6 @@ interface UserRepository {
 }
 
 interface FactRepository {
-    fun getFactByUser(id: UserId): Fact?
+    fun getFactByUserId(id: UserId): Fact?
     fun insertFact(fact: Fact)
 }
