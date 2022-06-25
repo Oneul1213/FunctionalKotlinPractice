@@ -28,7 +28,7 @@ class JdbcUserRepository(template: JdbcTemplate): JdbcRepository(template), User
 }
 
 class JdbcFactRepository(template: JdbcTemplate): JdbcRepository(template), FactRepository {
-    override fun getFactByUser(id: UserId): Fact? {
+    override fun getFactByUserId(id: UserId): Fact? {
         return toNullable {
             template.queryForObject("select * from USERS as U inner join FACTS as F on U.ID where U.ID=?", id) {
                 resultSet, _ ->
