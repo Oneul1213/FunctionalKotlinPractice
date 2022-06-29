@@ -15,7 +15,7 @@ fun main() {
     val factClient = MockFactClient()
     val userRepository = MockUserRepository()
     val factRepository = MockFactRepository()
-    val userService = SynchronousUserService(userClient,
+    val userService = CoroutineUserService(userClient,
         factClient,
         userRepository,
         factRepository)
