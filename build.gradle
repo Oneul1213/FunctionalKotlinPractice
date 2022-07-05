@@ -32,6 +32,8 @@ dependencies {
     compileOnly('com.h2database:h2:2.1.214')
 
     api 'nl.komponents.kovenant:kovenant:3.3.0'
+
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
 }
 
 test {
