@@ -1,8 +1,5 @@
 package chapter10
 
-import chapter4.add
-import java.util.*
-
 sealed class Option<out T> {
     object None: Option<Nothing>() {
         override fun toString() = "None"
