@@ -33,4 +33,15 @@ fun main() {
 
     val streamOf = Stream.of("아이템 1", "2", "아이템 3", 4, 5.0, "아이템 6")
     println("Items in Stream = ${streamOf.collect(Collectors.toList())}")
+
+    // Stream.generate()
+    println("--Stream.generate()--")
+
+    val streamGenerate = Stream.generate {
+        (1..20).random()
+    }
+    val resultantList = streamGenerate
+        .limit(10)
+        .collect(Collectors.toList())
+    println("resultantList = $resultantList")
 }
