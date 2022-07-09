@@ -27,4 +27,10 @@ fun main() {
     val emptyStream = Stream.empty<String>()
     val item = emptyStream.findAny()
     println("아이템 $item")
+
+    // Stream.of()
+    println("--Stream.of()--")
+
+    val streamOf = Stream.of("아이템 1", "2", "아이템 3", 4, 5.0, "아이템 6")
+    println("Items in Stream = ${streamOf.collect(Collectors.toList())}")
 }
