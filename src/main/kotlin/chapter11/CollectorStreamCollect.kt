@@ -1,6 +1,7 @@
 package chapter11
 
 import java.util.stream.Collectors
+import java.util.stream.Stream
 import kotlin.streams.asStream
 
 fun main() {
@@ -19,4 +20,17 @@ fun main() {
             it*it
         }))
     println("resultantMap = $resultantMap")
+
+    // joining
+    println("--joining--")
+    val resultantString = Stream.builder<String>()
+        .add("아이템 1")
+        .add("아이템 2")
+        .add("아이템 3")
+        .add("아이템 4")
+        .add("아이템 5")
+        .add("아이템 6")
+        .build()
+        .collect(Collectors.joining(" - ", "여기서 시작함=>", "<=여기서 끝남"))
+    println("resultantString $resultantString")
 }
