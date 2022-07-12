@@ -33,4 +33,10 @@ fun main() {
         .build()
         .collect(Collectors.joining(" - ", "여기서 시작함=>", "<=여기서 끝남"))
     println("resultantString $resultantString")
+
+    // groupingBy
+    println("--groupingBy--")
+    val resultantMapList = (1..20).asSequence().asStream()
+        .collect(Collectors.groupingBy<Int, Int> { it%5 })
+    println("resultantMapList $resultantMapList")
 }
